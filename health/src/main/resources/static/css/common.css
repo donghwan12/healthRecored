@@ -1,0 +1,58 @@
+/* top_header.css */
+
+/* Resetting default browser styles */
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+/* Container for top header */
+.top-header {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+}
+
+.layout-150 {
+    max-width: 1500px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+/* Styling for left and right sections */
+.top-header .left,
+.top-header .right {
+    display: flex;
+    align-items: center;
+}
+
+/* Styling for right section */
+.top-header .right {
+    flex: 1;
+    justify-content: flex-end; /* Right-aligning the content */
+}
+
+/* Styling for .info list */
+.top-header .info {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.top-header .info li {
+    margin-left: 20px; /* Spacing between links */
+}
+
+.top-header .info a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.top-header .info a:hover {
+    text-decoration: underline;
+}
