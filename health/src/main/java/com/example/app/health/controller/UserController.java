@@ -29,7 +29,8 @@ public class UserController {
     @PostMapping("/join")
     public String join_post(@ModelAttribute("userDto") UserDto userDto, Model model){
         log.info("Post/UserController/join..." + userDto);
-        userService.userjoin(userDto);
-        return "redirect:/home";
+        userService.userjoin(userDto,model);
+        return "home";
     }
+
 }
