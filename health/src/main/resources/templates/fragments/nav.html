@@ -2,21 +2,30 @@
 <html lang="en" xmlns:th="">
 <head>
     <meta charset="UTF-8">
+
     <title>Title</title>
+
+    <link rel="stylesheet" href="/css/common.css"/>
 </head>
+
 <body>
 <th:block th:fragment="navFragment">
-    <nav class=layout-150>
+    <nav class="layout-150">
         <div class="left">
             <div class="sitemenu">
                 <a href="/">
-                    <span class="material-symbols-outlined">badge</span>
+                    <span class="material-symbols-outlined"></span>
                 </a>
             </div>
             <div class="logo">
-                <img src="" alt="logo" />
+                <a href="/main">
+                    <img class="logo_img"src="/assets/logo.png" alt="logo" />
+                </a>
             </div>
-
+            <div class="span">
+                <span style="font-size:20px;">
+                </span>
+            </div>
         </div>
     </nav>
 </th:block>

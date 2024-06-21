@@ -1,7 +1,10 @@
 package com.example.app.health.domain.User.Service;
 
+import com.example.app.health.domain.User.Dto.SessionDto;
 import com.example.app.health.domain.User.Dto.UserDto;
-import com.example.app.health.domain.User.Entity.user;
+import com.example.app.health.domain.User.Entity.session;
+import com.example.app.health.domain.User.Entity.User;
+import com.example.app.health.domain.User.repository.SessionRepository;
 import com.example.app.health.domain.User.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,14 +12,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
+import java.util.Optional;
+
 @Slf4j
 @Service
 public class UserService {
     UserDto userdto=new UserDto();
 
+    session session=new session();
+
+    SessionDto sessionDto=new SessionDto();
 
 
-
+    @Autowired
+    SessionRepository sessionRepository;
     @Autowired
     UserRepository userRepository;
 
@@ -33,7 +42,7 @@ public class UserService {
             System.out.println("이미 아이디가 존재합니다.");
         return false;
         }
-        user user=new user();
+        User user=new User();
         user.setId(userdto.getId());
 
         //비밀번호 암호화
@@ -51,28 +60,32 @@ public class UserService {
 
     //로그인처리
     @Transactional(rollbackFor = Exception.class)
-    public UserDto UserLogin(UserDto userDto){
-        log.info("UserService/userLogin/userDto : "+userDto);
-        user user=new user();
+    public SessionDto UserLogin(SessionDto sessionDto){
+        log.info("UserService/userLogin/userDto : "+sessionDto);
+
+        Optional<User> userOptional=userRepository.findById(sessionDto.getId());
 
         //아이디,패스워드가 존재하지 않는경우.
-        if(!userDto.getId().equals(user.getId())){
+        if(userOptional.isEmpty()){
             log.info("입력하신 아이디가 존재하지않습니다");
             return null;
         }
-        if(!userDto.getPassword().equals(user.getPassword())){
+        User user=userOptional.get();
+
+        if(!sessionDto.getId().equals(user.getId())){
+            log.info("입력하신 아이디가 존재하지않습니다.");
+            return null;
+        }
+        if(!sessionDto.getPassword().equals(user.getPassword())){
             log.info("입력하신 비밀번호가 존재하지않습니다.");
             return null;
-
-        }
-        //로그인성공
-        if(userDto.getId().equals(user.getId())){
-            if( userDto.getPassword().equals(user.getPassword())){
-                log.info("로그인에 성공하셨씁니다.");
-                return userDto;
-            }
         }
 
-        return userDto;
+        session.setId(sessionDto.getId());
+        session.setPassword(sessionDto.getPassword());
+        log.info("session : "+session);
+        sessionRepository.save(session);
+        log.info("로그인에 성공했습니다.");
+        return sessionDto;
     }
 }

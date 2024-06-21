@@ -1,0 +1,53 @@
+.section1{
+    width:100%;
+    height:600px;
+    border:1px solid;
+    display:flex;
+    justify-contents:center;
+
+
+}
+.aside1,.aside2{
+    width:25%;
+    height:100%;
+    border:1px solid;
+    dispaly: flex;
+    justify-content:center;
+    text-align:center;
+
+}
+.m-1{
+    width:50%;
+    height:100%;
+
+    justify-content: center;
+    text-align: center;
+
+}
+.section2{
+    margin-top:10px;
+    width:100%;
+    height:300px;
+}
+.section2_div{
+    width:100%;
+    height:100%;
+    border:1px solid;
+}
+#calendar {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            height: calc(100vh - 200px); /* 화면의 높이에 맞춰서 조정 */
+}
+.routine{
+    display:flex;
+}
+.routine>label{
+    padding:5px;
+    margin :5px;
+}
+.routine>input{
+    padding:5px;
+    margin :5px;
+}

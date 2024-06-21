@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="">
+<head>
+    <meta charset="UTF-8">
+    <title>캘린더</title>
+</head>
+<body>
+<th:block th:fragment="CalenderFragment">
+    <div class="wrapper">
+        <main>
+            <section class="banner">
+                <div id='calendar' class="layout-5"></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- 모달 버튼 (실제로는 display:none으로 숨겨짐) -->
+    <button style="display:none;" type="button" class="btn btn-primary calenderEventModal" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+        Launch demo modal
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                locale: 'ko',
+                initialView: 'dayGridMonth',
+                selectable: true,
+                height: 'auto', // 화면에 맞춰 자동으로 높이 조정
+                events: [], // 여기에는 서버에서 받아온 이벤트 리스트를 넣습니다.
+                dateClick: function(info) {
+                    console.log(info.dateStr);
+                    // 날짜 클릭 시 모달 표시
+                    document.getElementById('workoutDate').value = info.dateStr;
+                    var workoutModal = new bootstrap.Modal(document.getElementById('workoutModal'));
+                    workoutModal.show();
+                },
+                eventClick: function(info) {
+                    console.log(info.event);
+                    // 이벤트 클릭 시 처리할 내용
+                    document.querySelector('.calenderEventModal').click();
+                    document.querySelector('.modal-body').innerHTML = `
+                        <p>이벤트: ${info.event.title}</p>
+                        <p>시작: ${info.event.start}</p>
+                        <p>종료: ${info.event.end}</p>
+                    `;
+                }
+            });
+            calendar.render();
+        });
+
+
+
+
+
+
+    </script>
+</th:block>
+</body>
+</html>
