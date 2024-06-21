@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class WorkoutDto {
 
+    private String id;
     private String part;
     private String kind;
     private String workout_set;
