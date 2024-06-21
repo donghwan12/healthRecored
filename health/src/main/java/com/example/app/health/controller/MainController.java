@@ -18,14 +18,15 @@ public class MainController {
         log.info("GET/Main...");
 
         WorkoutDto workoutDto=new WorkoutDto();
-        model.addAttribute("WorkoutDto",workoutDto);
+        model.addAttribute("workoutDto",workoutDto);
 
         return "main";
     }
 
     @PostMapping("/main")
-    public String processWorkout(@ModelAttribute WorkoutDto workoutDto) {
+    public String processWorkout(@ModelAttribute("WorkoutDto") WorkoutDto workoutDto) {
         // 폼 데이터 처리 로직
+        log.info("post/processWorkout/workoutDto : "+workoutDto);
         return "redirect:/main"; // 처리 후 리다이렉트하는 경우
     }
 

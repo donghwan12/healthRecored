@@ -65,7 +65,7 @@
 </div>
 
 <!-- 운동 기록 입력 모달 -->
-<form id="workoutForm" method="post" action="@{/main}" th:object="${workoutDto}">
+<form id="workoutForm" method="post" th:action="@{/main}" th:object="${workoutDto}">
     <div class="modal fade" id="workoutModal" tabindex="-1" aria-labelledby="workoutModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
