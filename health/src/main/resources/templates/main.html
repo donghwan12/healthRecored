@@ -45,6 +45,7 @@
             <aside class="aside1">
                 <div class="aside_div1">
                     광고입니다.
+                    <a th:href="@{'/list'}">운동기록보기</a>
                 </div>
             </aside>
             <div class="m-1">
@@ -91,30 +92,43 @@
                                 <input type="text" class="form-control" id="workoutType1" name="kind">
                                 <label for="workset1" class="form-label">세트</label>
                                 <input type="text" class="form-control" id="workset1" name="workout_set">
+                                <label for="workKg1" class="form-label">무게</label>
+                                <input type="text" class="form-control" id="kg1" name="kg">
+
                             </div>
                             <div class="mb-3">
                                 <label for="workoutType2" class="form-label">운동 종류</label>
                                 <input type="text" class="form-control" id="workoutType2" name="kind">
                                 <label for="workset2" class="form-label">세트</label>
                                 <input type="text" class="form-control" id="workset2" name="workout_set">
+                                <label for="workKg2" class="form-label">무게</label>
+                                <input type="text" class="form-control" id="kg2" name="kg">
                             </div>
                             <div class="mb-3">
                                 <label for="workoutType3" class="form-label">운동 종류</label>
                                 <input type="text" class="form-control" id="workoutType3" name="kind">
                                 <label for="workset3" class="form-label">세트</label>
                                 <input type="text" class="form-control" id="workset3" name="workout_set">
+                                <label for="workKg3" class="form-label">무게</label>
+                                <input type="text" class="form-control" id="kg3" name="kg">
                             </div>
                             <div class="mb-3">
                                 <label for="workoutType4" class="form-label">운동 종류</label>
                                 <input type="text" class="form-control" id="workoutType4" name="kind">
                                 <label for="workset4" class="form-label">세트</label>
                                 <input type="text" class="form-control" id="workset4" name="workout_set">
+                                <label for="workKg4" class="form-label">무게</label>
+                                <input type="text" class="form-control" id="kg4" name="kg">
                             </div>
                         </div>
                         <button type="button" class="btn btn-secondary" id="addWorkoutDetail">운동 종류 추가</button>
                         <div class="mb-3">
                             <label for="workoutTime" class="form-label">시간</label>
                             <input type="text" class="form-control" id="workoutTime" th:field="*{time}">
+                        </div>
+                        <div c;ass="mb-3">
+                            <label for="workoutName" class="form-label">이름</label>
+                            <input type="text" class="form-control" id="workoutName" th:field="*{name}">
                         </div>
                     </div>
                 </div>
@@ -138,6 +152,8 @@
             <input type="text" class="form-control" id="workoutType${index}" name="kind">
             <label for="workset${index}" class="form-label">세트</label>
             <input type="text" class="form-control" id="workset${index}" name="workout_set">
+            <label for=workKg${index}" class="from-label">무게</label>
+            <input type="text" class="form-control" id="kg${index}" name="kg">
         `;
         container.appendChild(newWorkoutDetail);
     });

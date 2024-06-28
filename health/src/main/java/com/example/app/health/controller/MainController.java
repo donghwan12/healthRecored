@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 @Slf4j
 public class MainController {
@@ -48,6 +50,17 @@ public class MainController {
 
         mainService.wokrout_add(workoutDto);
         return "redirect:/main"; // 처리 후 리다이렉트하는 경우
+    }
+
+    @GetMapping("/list")
+    public String List_Get(Model model) {
+        log.info("GET/list");
+
+        WorkoutDto workoutDto=new WorkoutDto();
+        List<WorkoutDto> workoutDtoList= (List<WorkoutDto>) mainService.workoutList();
+        log.info("wokroutDtoList : "+workoutDtoList);
+        model.addAttribute("workoutDto",workoutDtoList);
+        return "list";
     }
 
 }

@@ -11,4 +11,5 @@ public class SessionDto {
 
     private String id;
     private String password;
+    private String name;
 }

@@ -15,11 +15,13 @@ public class Workout {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
+    private String name;
     private String part;
     private String kind;
     private String workout_set;
+    private String kg;
     private String time;
     private String date;
 

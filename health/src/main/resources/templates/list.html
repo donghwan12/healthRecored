@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/common.css">
+<style>
+    /* 테이블 스타일 */
+    table {
+    border-collapse: collapse;
+    width: 100%;
+    }
+    th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    }
+    th {
+    background-color: #f2f2f2;
+    }
+    /* 짝수 행 색상 지정 */
+    tr:nth-child(even) {
+    background-color: #f2f2f2;
+    }
+    .deleteForm{
+    border: 1px solid;
+    color: black;
+    }
+</style>
+</head>
+<body>
+<div class="wrapper">
+    <header>
+        <!-- header -->
+        <th:block th:insert="~{fragments/top_header :: topHeaderFragment}"/>
+        <!-- nav -->
+        <th:block th:insert="~{fragments/nav :: navFragment}"/>
+    </header>
+</div>
+    <section>
+        <h1>내 운동기록</h1>
+        <form id="wokroutForm" action="/delete" method="post">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>날짜</th>
+                        <th>운동부위</th>
+                        <th>운동시간</th>
+                        <th>부가사항</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="workoutDto : ${workoutDto}">
+                        <td th:text="${workoutDto.id}"></td>
+                        <td th:text="${workoutDto.date}"></td>
+                        <td th:text="${workoutDto.part}"></td>
+                        <td th:text="${workoutDto.time}"></td>
+                        <td>
+                            <a th:href="@{'/read/{id}'+ ${workoutDto.id}}">상세보기</a>
+
+                            <form id="deleteForm" th:action="@{/delete/{id}(id=${workoutDto.id})}" method="post">
+                                <input type="hidden" name="_method" value="delete">
+                                <button type="submit">삭제</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </form>
+    </section>
+</body>
+</html>

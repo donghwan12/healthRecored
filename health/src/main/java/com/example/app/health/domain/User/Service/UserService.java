@@ -62,6 +62,10 @@ public class UserService {
     @Transactional(rollbackFor = Exception.class)
     public SessionDto UserLogin(SessionDto sessionDto){
         log.info("UserService/userLogin/userDto : "+sessionDto);
+        UserDto userDto=new UserDto();
+        userDto.setName(String.valueOf(userRepository.existsById(sessionDto.getId())));
+
+        log.info("userDto.setname : " +userDto.getName());
 
         Optional<User> userOptional=userRepository.findById(sessionDto.getId());
 
@@ -81,11 +85,14 @@ public class UserService {
             return null;
         }
 
+
         session.setId(sessionDto.getId());
         session.setPassword(sessionDto.getPassword());
+        session.setName(String.valueOf(userDto.getName()));
         log.info("session : "+session);
         sessionRepository.save(session);
         log.info("로그인에 성공했습니다.");
         return sessionDto;
     }
+
 }
