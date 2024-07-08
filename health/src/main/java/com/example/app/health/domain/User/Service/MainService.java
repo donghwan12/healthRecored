@@ -12,8 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -58,6 +57,8 @@ public class MainService {
         return workoutDto;
     }
 
+
+    //list 조회
     @Transactional(rollbackFor = Exception.class)
     public List<WorkoutDto> workoutList(){
 
@@ -77,5 +78,15 @@ public class MainService {
 
         log.info("workoutDto : "+workoutDtos);
         return workoutDtos;
+    }
+    //상세읽기 서ㅣ스
+    @Transactional(rollbackFor = Exception.class)
+    public Map<String, Object> Read(Long id) {
+        log.info("MainService/read...!" + id);
+        Map<String, Object> result = new HashMap();
+
+        Optional<Workout> workout= (workOutRepository.findById(id));
+        result.put("workout",workout);
+        return result;
     }
 }
