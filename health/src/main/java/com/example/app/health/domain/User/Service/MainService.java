@@ -1,9 +1,11 @@
 package com.example.app.health.domain.User.Service;
 
+import com.example.app.health.domain.User.Dto.WorkOutDetailDto;
 import com.example.app.health.domain.User.Dto.WorkoutDto;
 import com.example.app.health.domain.User.Entity.User;
 import com.example.app.health.domain.User.Entity.Workout;
 import com.example.app.health.domain.User.Entity.session;
+import com.example.app.health.domain.User.Entity.workoutdetail;
 import com.example.app.health.domain.User.repository.SessionRepository;
 import com.example.app.health.domain.User.repository.UserRepository;
 import com.example.app.health.domain.User.repository.WorkOutDetailRepository;
@@ -33,16 +35,25 @@ public class MainService {
         log.info("MainSErvice/wokrout_add/workoutDto : "+workoutDto);
 
         Workout workout=new Workout();
+        workoutdetail workoutdetail=new workoutdetail();
         User user=userRepository.findByname(workoutDto.getName());
         String passowrd=user.getPassword();
-
         log.info("password : "+ passowrd);
-
         session session=sessionRepository.findBypassword(passowrd);
         log.info("session : "+session);
 
+        workout.setDate(workoutDto.getDate());
+        workout.setTime(workoutDto.getTime());
+        workout.setId(workoutDto.getId());
+        workout.setName(workoutDto.getName());
+        workout.setExercise(workoutDto.getExercise());
 
-        log.info("wokrout : "+workout);
+        log.info("worktou :  "+workout);
+
+       List<WorkOutDetailDto> workoutdetails=workoutDto.getWorkoutdetails();
+       log.info("workoutdetials : "+workoutdetails);
+
+
 
 
         workOutRepository.save(workout);

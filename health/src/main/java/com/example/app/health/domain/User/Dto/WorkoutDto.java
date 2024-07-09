@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class WorkoutDto {
 
-    private Long id;
+    private long id;
 
     private String name;
     private String exercise;
