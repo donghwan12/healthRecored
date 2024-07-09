@@ -24,8 +24,8 @@ public class session {
     private String password;
     private String name;
 
-    @OneToMany(mappedBy = "session", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Workout> workouts = new ArrayList<>(); // workouts 컬렉션을 초기화
+//    @OneToMany(mappedBy = "session", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Workout> workouts = new ArrayList<>(); // workouts 컬렉션을 초기화
 
     @Override
     public String toString() {

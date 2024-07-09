@@ -6,6 +6,7 @@ import com.example.app.health.domain.User.Entity.Workout;
 import com.example.app.health.domain.User.Entity.session;
 import com.example.app.health.domain.User.repository.SessionRepository;
 import com.example.app.health.domain.User.repository.UserRepository;
+import com.example.app.health.domain.User.repository.WorkOutDetailRepository;
 import com.example.app.health.domain.User.repository.WorkOutRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +26,13 @@ public class MainService {
     SessionRepository sessionRepository;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    WorkOutDetailRepository workOutDetailRepository;
 
     public WorkoutDto wokrout_add(WorkoutDto workoutDto){
         log.info("MainSErvice/wokrout_add/workoutDto : "+workoutDto);
 
         Workout workout=new Workout();
-
         User user=userRepository.findByname(workoutDto.getName());
         String passowrd=user.getPassword();
 
@@ -39,15 +41,6 @@ public class MainService {
         session session=sessionRepository.findBypassword(passowrd);
         log.info("session : "+session);
 
-
-        workout.setWorkout_set(workoutDto.getWorkout_set());
-        workout.setId(workout.getId());
-        workout.setKg(workoutDto.getKg());
-        workout.setDate(workoutDto.getDate());
-        workout.setTime(workoutDto.getTime());
-        workout.setPart(workoutDto.getPart());
-        workout.setKind(workoutDto.getKind());
-        workout.setSession(session);
 
         log.info("wokrout : "+workout);
 
@@ -70,7 +63,7 @@ public class MainService {
             WorkoutDto workoutDto = new WorkoutDto();
             workoutDto.setId(workout.getId());
             workoutDto.setDate(workout.getDate());
-            workoutDto.setPart(workout.getPart());
+//            workoutDto.setPart(workout.getPart());
             workoutDto.setTime(workout.getTime());
 
             workoutDtos.add(workoutDto);

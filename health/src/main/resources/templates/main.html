@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>운동 기록</title>
@@ -66,7 +66,7 @@
 </div>
 
 <!-- 운동 기록 입력 모달 -->
-<form id="workoutForm" method="post" th:action="@{/main}" th:object="${workoutDto}">
+<form id="workoutForm" method="post" th:action="@{/main}" th:object="${workoutDto}" class="">
     <div class="modal fade" id="workoutModal" tabindex="-1" aria-labelledby="workoutModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -76,65 +76,41 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <input type="hidden" id="workoutDtoId" name="workoutDto.id" th:value="${workoutDto.id}" />
+                        <input type="hidden" id="workoutDtoId" th:field="*{id}" />
                         <label for="workoutDate" class="form-label">날짜</label>
-                        <input type="text" class="form-control" id="workoutDate" name="date" readonly>
+                        <input type="text" class="form-control" id="workoutDate" th:field="*{date}" readonly>
                     </div>
-                    <div id="workoutDetails">
-                        <div class="mb-3">
-                            <label for="workoutPart" class="form-label">운동 부위</label>
-                            <input type="text" class="form-control" id="workoutPart" th:field="*{part}">
+                    <div clas="mb-3">
+                        <label for="workexercise" class="form-label">운동부위</label>
+                        <input type="text" class="form-control" id="workexercise" th:field="*{exercise}">
+                    </div>
+                    <div id="workoutDetails" class="routine">
+                        <!-- 초기 운동 종류 입력 필드 -->
+                        <div class="mb-3" th:each="detail, stat : *{workoutdetails}">
+                            <input type="hidden" id="workoutDetailId" th:field="*{detail.id}" />
+                            <label for="'workoutType' + ${stat.index}" class="form-label">운동 종류</label>
+                            <input type="text" class="form-control" id="'workoutType' + ${stat.index}" name="workoutdetails[__${stat.index}__].kind" th:field="*{workoutdetails[__${stat.index}__].kind}">
+                            <label for="'workset' + ${stat.index}" class="form-label">세트</label>
+                            <input type="text" class="form-control" id="'workset' + ${stat.index}" name="workoutdetails[__${stat.index}__].workout_set" th:field="*{workoutdetails[__${stat.index}__].workout_set}">
+                            <label for="'workKg' + ${stat.index}" class="form-label">무게</label>
+                            <input type="text" class="form-control" id="'workKg' + ${stat.index}" name="workoutdetails[__${stat.index}__].kg" th:field="*{workoutdetails[__${stat.index}__].kg}">
+                            <label for="'workNumber' + ${stat.index}" class="form-label">횟수</label>
+                            <input type="text" class="form-control" id="'workNumber' + ${stat.index}" name="workoutdetails[__${stat.index}__].number" th:field="*{workoutdetails[__${stat.index}__].number}">
                         </div>
-                        <div class="routine" id="routine">
-                            <!-- 초기 4개의 운동 종류와 세트 필드 -->
-                            <div class="mb-3">
-                                <label for="workoutType1" class="form-label">운동 종류</label>
-                                <input type="text" class="form-control" id="workoutType1" name="kind">
-                                <label for="workset1" class="form-label">세트</label>
-                                <input type="text" class="form-control" id="workset1" name="workout_set">
-                                <label for="workKg1" class="form-label">무게</label>
-                                <input type="text" class="form-control" id="kg1" name="kg">
-
-                            </div>
-                            <div class="mb-3">
-                                <label for="workoutType2" class="form-label">운동 종류</label>
-                                <input type="text" class="form-control" id="workoutType2" name="kind">
-                                <label for="workset2" class="form-label">세트</label>
-                                <input type="text" class="form-control" id="workset2" name="workout_set">
-                                <label for="workKg2" class="form-label">무게</label>
-                                <input type="text" class="form-control" id="kg2" name="kg">
-                            </div>
-                            <div class="mb-3">
-                                <label for="workoutType3" class="form-label">운동 종류</label>
-                                <input type="text" class="form-control" id="workoutType3" name="kind">
-                                <label for="workset3" class="form-label">세트</label>
-                                <input type="text" class="form-control" id="workset3" name="workout_set">
-                                <label for="workKg3" class="form-label">무게</label>
-                                <input type="text" class="form-control" id="kg3" name="kg">
-                            </div>
-                            <div class="mb-3">
-                                <label for="workoutType4" class="form-label">운동 종류</label>
-                                <input type="text" class="form-control" id="workoutType4" name="kind">
-                                <label for="workset4" class="form-label">세트</label>
-                                <input type="text" class="form-control" id="workset4" name="workout_set">
-                                <label for="workKg4" class="form-label">무게</label>
-                                <input type="text" class="form-control" id="kg4" name="kg">
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-secondary" id="addWorkoutDetail">운동 종류 추가</button>
-                        <div class="mb-3">
-                            <label for="workoutTime" class="form-label">시간</label>
-                            <input type="text" class="form-control" id="workoutTime" th:field="*{time}">
-                        </div>
-                        <div c;ass="mb-3">
-                            <label for="workoutName" class="form-label">이름</label>
-                            <input type="text" class="form-control" id="workoutName" th:field="*{name}">
-                        </div>
+                    </div>
+                    <button type="button" class="btn btn-secondary" id="addWorkoutDetail">운동 종류 추가</button>
+                    <div class="mb-3">
+                        <label for="workoutTime" class="form-label">시간</label>
+                        <input type="text" class="form-control" th:field="*{time}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="workoutName" class="form-label">이름</label>
+                        <input type="text" class="form-control" th:field="*{name}">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                    <button type="button" class="btn btn-primary" id="saveWorkout">저장</button>
+                    <button type="submit" class="btn btn-primary" id="saveWorkout">저장</button>
                 </div>
             </div>
         </div>
@@ -143,29 +119,30 @@
 
 <script>
     document.getElementById('addWorkoutDetail').addEventListener('click', function() {
-        var container = document.getElementById('routine');
-        var newWorkoutDetail = document.createElement('div');
-        var index = container.children.length + 1;
-        newWorkoutDetail.className = 'mb-3';
-        newWorkoutDetail.innerHTML = `
-            <label for="workoutType${index}" class="form-label">운동 종류</label>
-            <input type="text" class="form-control" id="workoutType${index}" name="kind">
-            <label for="workset${index}" class="form-label">세트</label>
-            <input type="text" class="form-control" id="workset${index}" name="workout_set">
-            <label for=workKg${index}" class="from-label">무게</label>
-            <input type="text" class="form-control" id="kg${index}" name="kg">
-        `;
-        container.appendChild(newWorkoutDetail);
-    });
+     var container = document.getElementById('workoutDetails');
+     var index = container.children.length; // 현재 항목 개수
+     var newWorkoutDetail = document.createElement('div');
+     newWorkoutDetail.className = 'mb-3';
+     newWorkoutDetail.innerHTML = `
+         <div class="mb-3">
+             <label for="workoutType${index}" class="form-label">운동 종류</label>
+             <input type="text" class="form-control" id="workoutType${index}" name="workoutdetails[${index}].kind" th:field="*{workoutdetails[__${index}__].kind}">
+             <label for="workset${index}" class="form-label">세트</label>
+             <input type="text" class="form-control" id="workset${index}" name="workoutdetails[${index}].workout_set" th:field="*{workoutdetails[__${index}__].workout_set}">
+             <label for="workKg${index}" class="form-label">무게</label>
+             <input type="text" class="form-control" id="workKg${index}" name="workoutdetails[${index}].kg" th:field="*{workoutdetails[__${index}__].kg}">
+             <label for="workNumber${index}" class="form-label">횟수</label>
+             <input type="text" class="form-control" id="workNumber${index}" name="workoutdetails[${index}].number" th:field="*{workoutdetails[__${index}__].number}">
+         </div>
+     `;
+     container.appendChild(newWorkoutDetail);
 
-    document.getElementById('saveWorkout').addEventListener('click', function() {
-        var form = document.getElementById('workoutForm');
-        var formData = new FormData(form);
-        var dataObject = Object.fromEntries(formData.entries());
-        console.log(dataObject);
-        // 폼 데이터를 서버로 전송하는 추가적인 코드를 여기에 작성하세요.
-        form.submit();
-    });
+     // 모달 크기 자동 조정
+     var modalContent = document.querySelector('.modal-content');
+     modalContent.style.height = modalContent.scrollHeight + 'px';
+ });
+
+
 </script>
 
 </body>

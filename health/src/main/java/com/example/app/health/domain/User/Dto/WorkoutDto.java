@@ -1,6 +1,7 @@
 package com.example.app.health.domain.User.Dto;
 
-import com.example.app.health.domain.User.Entity.session;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,13 +14,11 @@ public class WorkoutDto {
     private Long id;
 
     private String name;
-    private String part;
-    private String kind;
-    private String workout_set;
-    private String kg;
+    private String exercise;
     private String time;
     private String date;
 
     private SessionDto sessionDto;
 
+    private List<WorkOutDetailDto> workoutdetails;  // 수정된 부분
 }

@@ -18,17 +18,11 @@ public class Workout {
     private Long id;
 
     private String name;
-    private String part;
-    private String kind;
-    private String workout_set;
-    private String kg;
     private String time;
+    private String exercise;
     private String date;
 
-    // 다른 필드들...
-
-    // session과의 관계 설정
-    @ManyToOne(fetch = FetchType.LAZY) // FetchType.LAZY를 사용하여 지연 로딩 설정
-    @JoinColumn(name = "session_id", nullable = false) // session_id 외래키
-    private session session; // session 엔티티와 연결
+    @ManyToOne
+    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_JOB_SEEKER_RESUME_2"))
+    private User user;
 }
