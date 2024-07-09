@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -42,22 +44,33 @@ public class MainService {
         session session=sessionRepository.findBypassword(passowrd);
         log.info("session : "+session);
 
+
         workout.setDate(workoutDto.getDate());
         workout.setTime(workoutDto.getTime());
         workout.setId(workoutDto.getId());
         workout.setName(workoutDto.getName());
         workout.setExercise(workoutDto.getExercise());
-
+        workout.setUser(user);
         log.info("worktou :  "+workout);
 
-       List<WorkOutDetailDto> workoutdetails=workoutDto.getWorkoutdetails();
-       log.info("workoutdetials : "+workoutdetails);
 
 
+        List<workoutdetail> workoutDetails = workoutDto.getWorkoutdetails().stream().map(detailDto -> {
+            workoutdetail detail = new workoutdetail();
+//            detail.setPart(detailDto.getPart());
+            detail.setKind(detailDto.getKind());
+            detail.setExerciseSet(detailDto.getWorkout_set());
+            detail.setKg(detailDto.getKg());
+            detail.setNumber(detailDto.getNumber());
+            detail.setWorkout(workout);
+            return detail;
+        }).collect(Collectors.toList());
 
-
+        workout.setWorkoutDetails(workoutDetails);
+        log.info("workout: " + workout);
         workOutRepository.save(workout);
-
+//        log.info("workoutdetails : "+workoutdetail);
+//        workOutDetailRepository.save(workoutdetail);
         return workoutDto;
     }
 

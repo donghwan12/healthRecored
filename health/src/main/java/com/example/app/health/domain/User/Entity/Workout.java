@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,4 +27,19 @@ public class Workout {
     @ManyToOne
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_JOB_SEEKER_RESUME_2"))
     private User user;
+
+    @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<workoutdetail> workoutDetails;
+
+
+    @Override
+    public String toString() {
+        return "Workout{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", exercise='" + exercise + '\'' +
+                ", time='" + time + '\'' +
+                ", date='" + date + '\'' +
+                '}';
+    }
 }
