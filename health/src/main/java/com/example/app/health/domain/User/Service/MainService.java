@@ -87,7 +87,7 @@ public class MainService {
             WorkoutDto workoutDto = new WorkoutDto();
             workoutDto.setId(workout.getId());
             workoutDto.setDate(workout.getDate());
-//            workoutDto.setPart(workout.getPart());
+            workoutDto.setExercise(workout.getExercise());
             workoutDto.setTime(workout.getTime());
 
             workoutDtos.add(workoutDto);

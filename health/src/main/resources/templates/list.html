@@ -54,7 +54,7 @@
                     <tr th:each="workoutDto : ${workoutDto}">
                         <td th:text="${workoutDto.id}"></td>
                         <td th:text="${workoutDto.date}"></td>
-                        <td th:text="${workoutDto.part}"></td>
+                        <td th:text="${workoutDto.exercise}"></td>
                         <td th:text="${workoutDto.time}"></td>
                         <td>
                             <a th:href="@{'/read/{id}'+ ${workoutDto.id}}">상세보기</a>
