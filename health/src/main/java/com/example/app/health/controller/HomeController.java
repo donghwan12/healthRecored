@@ -29,6 +29,7 @@ public class HomeController {
     }
     @PostMapping("/")
     public String home_post(@ModelAttribute("sessionDto")SessionDto sessionDto,Model model){
+
         log.info("sessionDto : "+sessionDto);
         SessionDto logSession=userService.UserLogin(sessionDto);
 
