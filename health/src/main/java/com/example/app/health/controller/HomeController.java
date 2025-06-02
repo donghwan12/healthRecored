@@ -24,6 +24,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model){
+        log.info("HomeController 진입");
         model.addAttribute("sessionDto",new SessionDto());
         return "home";
     }
@@ -36,6 +37,7 @@ public class HomeController {
         if (logSession != null) {
             return "redirect:/main";
         } else {
+            model.addAttribute("sessionDto",sessionDto);
             model.addAttribute("errorMessage", "아이디 또는 비밀번호가 잘못되었습니다.");
             return "home";
         }

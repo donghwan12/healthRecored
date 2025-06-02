@@ -22,12 +22,12 @@ public class UserController {
     @GetMapping("/join")
     public String join(Model model){
         log.info("Get/UserController/join...");
-        model.addAttribute("userDto", new UserDto());
+        model.addAttribute("UserDto", new UserDto());
         return "/user/join";
     }
 
     @PostMapping("/join")
-    public String join_post(@ModelAttribute("userDto") UserDto userDto, Model model){
+    public String join_post(@ModelAttribute("UserDto") UserDto userDto, Model model){
         log.info("Post/UserController/join..." + userDto);
         userService.userjoin(userDto,model);
         return "home";
