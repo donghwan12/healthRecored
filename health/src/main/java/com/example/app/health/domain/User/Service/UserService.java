@@ -33,6 +33,7 @@ public class UserService {
     @Transactional(rollbackFor = Exception.class)
     public boolean userjoin(UserDto userdto, Model model){
 
+        log.info("UserJoin/UserService/userjoin...");
         //password vsrepassword
         if(!userdto.getPassword().equals(userdto.getRepassword())){
             System.out.println("패스워드가 일치하지않습니다.");

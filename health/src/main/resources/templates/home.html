@@ -1,37 +1,36 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>운동에 미치다 - 로그인</title>
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/home.css">
 </head>
-
 <body>
 <h1>운동에 미치다</h1>
+
 <div class="wrapper">
-    <form th:action="@{/}" method="post" th:object="${sessionDto}" enctype="application/x-www-form-urlencoded">
+    <!-- GET 핸들러에서 model.addAttribute("sessionDto", new SessionDto())를 해 줘야 합니다. -->
+    <form th:action="@{/}" th:object="${sessionDto}" method="post">
         <div>
             <label>아이디</label>
-            <input type="text" th:field="*{id}" placeholder="아이디를 입력하세요">
+            <input type="text" th:field="*{id}" placeholder="아이디를 입력하세요" />
         </div>
         <div>
             <label>비밀번호</label>
-            <input type="password" th:field="*{password}" placeholder="비밀번호를 입력하세요">
+            <input type="password" th:field="*{password}" placeholder="비밀번호를 입력하세요" />
         </div>
         <div>
-           <button>로그인</button>
+            <button type="submit">로그인</button>
         </div>
         <div>
-            <a href="">아이디/비밀번호 찾기</a>
-            <a href="/join">회원가입하기</a>
+            <a href="#">아이디/비밀번호 찾기</a>
+            <a th:href="@{/join}">회원가입하기</a>
         </div>
         <div th:if="${errorMessage}" style="color: red;">
             <p th:text="${errorMessage}"></p>
         </div>
     </form>
 </div>
-
 </body>
 </html>
